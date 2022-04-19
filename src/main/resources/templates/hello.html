@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+    <nav th:include="navbar :: navbar"></nav>
+    <h1>Hello  <span th:text="${name}">everybody!</span>!</h1>
+</body>
+</html>
