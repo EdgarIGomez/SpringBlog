@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
+
 @Controller
 public class RollDiceController {
 
@@ -15,16 +17,21 @@ public class RollDiceController {
 
     @GetMapping("/roll-dice/{n}")
     public String guess(@PathVariable int n, Model model){
-        int diceRoll = 1 + (int)(Math.random() * 6);
-        String message;
-        if(n == diceRoll){
-            message = "The dice rolled a " + diceRoll + " you guessed " + n + " which is correct congratulations!";
-        }else if(n > diceRoll){
-            message = "The dice rolled a " + diceRoll + " you guessed " + n + " which is too high try again next time!";
-        }else{
-            message = "The dice rolled a " + diceRoll + " you guessed " + n + " which is too low try again next time!";
+        int counter = 0;
+        ArrayList<Integer> rolls  = new ArrayList<>();
+        for(int i = 0; i < 6; i++){
+            int diceRoll = 1 + (int)(Math.random() * 6);
+            if(n == diceRoll){
+                counter++;
+            }
+            rolls.add(diceRoll);
         }
+
+        String message = "The dice rolled: ";
+        String results = "You guessed " + n + " which you got  right " + counter + " times!";
         model.addAttribute("message", message);
+        model.addAttribute("results", results);
+        model.addAttribute("rolls", rolls);
         return "dice-roll-results";
     }
 }
