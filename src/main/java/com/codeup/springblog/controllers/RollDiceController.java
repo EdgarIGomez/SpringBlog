@@ -32,6 +32,6 @@ public class RollDiceController {
         model.addAttribute("message", message);
         model.addAttribute("results", results);
         model.addAttribute("rolls", rolls);
-        return "dice-roll-results";
+        return "roll-dice";
     }
 }

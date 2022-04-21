@@ -12,5 +12,13 @@
   <a href="/roll-dice/4">I guess 4!</a>
   <a href="/roll-dice/5">I guess 5!</a>
   <a href="/roll-dice/6">I guess 6!</a>
+
+  <div th:if="${message}">
+      <h1 th:text="${message}"></h1>
+      <div th:each="roll: ${rolls}">
+          <div th:text="${roll}"></div>
+      </div>
+      <p th:text="${results}"></p>
+  </div>
 </body>
 </html>
