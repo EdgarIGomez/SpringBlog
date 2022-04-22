@@ -27,6 +27,11 @@ public class Post {
 
     }
 
+    public Post(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
+
     public Post(String title, String body, User user) {
         this.title = title;
         this.body = body;

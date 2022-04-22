@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create Posts</title>
+    <title>Edit Post</title>
 </head>
 <body>
     <div>
-        <form th:method="POST" th:action="@{/post/create}" th:object="${post}">
+        <form th:method="POST" th:action="@{/post/{id}/edit(id=${post.getId()})}" th:object="${post}">
+<!--            <input type="hidden" th:field="*{id}"/>-->
             <label for="postTitle">Post Title</label>
-            <input id="postTitle" th:field="*{title}" />
+            <input id="postTitle" th:field="*{title}"/>
             <br>
             <label for="postBody">Post Body</label>
             <input id="postBody" th:field="*{body}">

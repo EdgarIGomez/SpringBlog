@@ -9,6 +9,8 @@
         <h1 th:text="${post.getTitle()}"></h1>
         <p th:text="${post.getBody()}"></p>
         <h3>User: <span th:text="${post.getUser().getUsername()}"></span> </h3>
+        <h3>Email: <span th:text="${post.getUser().getEmail()}"></span> </h3>
+        <button type="button"><a th:href="@{/post/{id}/edit(id=${post.getId()})}">Edit Post</a></button>
     </div>
 </body>
 </html>
