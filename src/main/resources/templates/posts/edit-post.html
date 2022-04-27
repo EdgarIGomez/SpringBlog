@@ -5,8 +5,9 @@
     <title>Edit Post</title>
 </head>
 <body>
+<nav th:include="partials/navbar.html :: navbar"></nav>
     <div>
-        <form th:method="POST" th:action="@{/post/{id}/edit(id=${post.getId()})}" th:object="${post}">
+        <form th:method="POST" th:action="@{/posts/{id}/edit(id=${post.getId()})}" th:object="${post}">
 <!--            <input type="hidden" th:field="*{id}"/>-->
             <label for="postTitle">Post Title</label>
             <input id="postTitle" th:field="*{title}"/>

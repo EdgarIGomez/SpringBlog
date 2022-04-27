@@ -1,9 +1,11 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,38 +28,45 @@ public class PostController {
         return "posts/index";
     }
 
-    @RequestMapping(path = "/post/{id}")
+    @RequestMapping(path = "/posts/{id}")
     public String postById(@PathVariable long id, Model model){
         Post postFromId = postDao.getById(id);
         model.addAttribute("post", postFromId);
         return "posts/show";
     }
 
-    @GetMapping( "/post/create")
+    @GetMapping( "/posts/create")
     public String createPost(Model model){
         model.addAttribute("post", new Post());
+        model.addAttribute("action", "create");
         return "posts/create";
     }
 
-    @PostMapping("/post/create")
+    @PostMapping("/posts/create")
     public String postCreatePost(@ModelAttribute Post post){
 
-        post.setUser(userDao.getById(1L));
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(loggedInUser);
         postDao.save(post);
+        String emailBody = "New post has been created. " + "Title: " + post.getTitle();
+        emailService.prepareAndSend(post, "New Post", emailBody);
         return "redirect:/posts";
     }
 
-    @GetMapping("/post/{id}/edit")
+    @GetMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id, Model model){
         Post post = postDao.getById(id);
         model.addAttribute("post", post);
-        return "posts/edit-post";
+        String action = id + "/edit";
+        model.addAttribute("action", action);
+        return "posts/create";
     }
 
-    @PostMapping("/post/{id}/edit")
+    @PostMapping("/posts/{id}/edit")
     public String saveEditedPost(@ModelAttribute Post post, @PathVariable long id){
         post.setId(id);
-        post.setUser(userDao.getById(1L));
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(loggedInUser);
         postDao.save(post);
         return "redirect:/posts";
     }

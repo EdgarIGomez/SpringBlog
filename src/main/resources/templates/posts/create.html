@@ -5,8 +5,10 @@
     <title>Create Posts</title>
 </head>
 <body>
+<nav th:include="partials/navbar.html :: navbar"></nav>
+<h1>This is the create form</h1>
     <div>
-        <form th:method="POST" th:action="@{/post/create}" th:object="${post}">
+        <form th:method="POST" th:action="@{/posts/{action}(action=${action})}" th:object="${post}">
             <label for="postTitle">Post Title</label>
             <input id="postTitle" th:field="*{title}" />
             <br>
