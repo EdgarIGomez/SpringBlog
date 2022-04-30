@@ -9,7 +9,8 @@
 <div th:each="post: ${posts}">
     <h2 th:text="${post.getTitle()}"></h2>
     <p th:text="${post.getBody()}"></p>
-    <a th:href="@{/posts/{id}(id=${post.getId()})}">See Post</a>
+    <button><a th:href="@{/posts/{id}(id=${post.getId()})}">See Post</a></button>
+    <button><a th:href="@{/posts/{id}/delete(id=${post.getId()})}">Delete</a> </button>
 </div>
 
 <!--    <div>-->
