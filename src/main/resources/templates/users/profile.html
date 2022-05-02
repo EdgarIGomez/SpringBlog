@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:include="partials/navbar.html :: navbar"></nav>
+<div>
+    <h1>Hello, <span th:text="${user.getUsername()}"></span> </h1>
+    <h3>Email: <span th:text="${user.getEmail()}"></span> </h3>
+</div>
+</body>
+</html>
