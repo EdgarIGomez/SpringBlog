@@ -9,6 +9,7 @@
 <div>
     <h1>Hello, <span th:text="${user.getUsername()}"></span> </h1>
     <h3>Email: <span th:text="${user.getEmail()}"></span> </h3>
+    <a th:href="@{/profile/delete/{id}(id = ${user.getId()})}">Delete your Account</a>
 </div>
 </body>
 </html>
